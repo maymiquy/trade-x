@@ -43,6 +43,12 @@ react {
     //   See https://github.com/react-native-community/cli/blob/main/docs/commands.md#bundle
     // extraPackagerArgs = []
 
+    // Vector Icons & Fonts
+    project.ext.vectoricons = [
+          iconFontNames: [ 'MaterialCommunityIcons.ttf', 'EvilIcons.ttf',"MaterialIcons.ttf" ,"Ionicons.ttf","FontAwesome.ttf","AntDesign.ttf"]
+    ]
+    apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
+
     /* Hermes Commands */
     //   The hermes compiler command to run. By default it is 'hermesc'
     // hermesCommand = "$rootDir/my-custom-hermesc/bin/hermesc"
