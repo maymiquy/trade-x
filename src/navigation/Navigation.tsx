@@ -3,7 +3,7 @@ import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { navigationRef } from "../utils/navigation-util";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../screens/HomeScreen";
-import LoginScreen from "../screens/LoginScreen";
+import LoginScreen from "../screens/auth/LoginScreen";
 import { useTheme } from "../theme/useTheme";
 
 const Stack = createNativeStackNavigator();
@@ -24,7 +24,7 @@ export default function Navigation() {
  return (
   <NavigationContainer ref={navigationRef} theme={appTheme}>
    <Stack.Navigator
-    initialRouteName="Home"
+    initialRouteName="Login"
     screenOptions={() => ({
      headerShown: false,
     })}
