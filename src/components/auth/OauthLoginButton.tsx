@@ -7,7 +7,7 @@ import { FONTS } from "../../utils/constants/Fonts";
 interface OauthLoginButtonProps {
  icon: React.ReactNode;
  text: string;
- onPress: () => void;
+ onPress: () => {};
 }
 
 const OauthLoginButton: React.FC<OauthLoginButtonProps> = ({

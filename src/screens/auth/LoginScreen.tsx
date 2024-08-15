@@ -16,6 +16,7 @@ import OauthLoginButton from "../../components/auth/OauthLoginButton";
 import { useScheme, useTheme } from "../../theme/useTheme";
 import TouchAbleText from "../../components/auth/TouchAbleText";
 import FooterText from "../../components/auth/FooterText";
+import { signInWithGoogle } from "../../services/oauth.service";
 
 const LoginScreen = () => {
  const { colors } = useTheme();
@@ -40,14 +41,9 @@ const LoginScreen = () => {
      />
     </View>
     <OauthLoginButton
-     onPress={() => {}}
+     onPress={async () => await signInWithGoogle()}
      icon={<Image source={GoogleIcon} style={styles.img_google} />}
      text="Continue with Google"
-    />
-    <OauthLoginButton
-     onPress={() => {}}
-     icon={<Icon name="logo-facebook" size={26} color="#1877F2" />}
-     text="Continue with Facebook"
     />
     <Text style={{ marginTop: 10, fontSize: 12, color: colors.text }}>or</Text>
     <TouchAbleText
