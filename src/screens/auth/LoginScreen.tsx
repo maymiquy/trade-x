@@ -62,13 +62,14 @@ const styles = StyleSheet.create({
   justifyContent: "center",
   alignItems: "center",
   paddingTop: 20,
+  paddingHorizontal: 20,
  },
  sub_text: {
   marginTop: 14,
   opacity: 0.6,
  },
  img_container: {
-  width: screenWidth * 0.9,
+  width: screenWidth * 1,
   height: screenHeight * 0.45,
   marginVertical: normalizeModerately(25),
  },

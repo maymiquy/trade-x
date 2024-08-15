@@ -14,7 +14,7 @@ import Toast from "react-native-toast-message";
 
 GoogleSignin.configure({
  webClientId:
-  "234933592151-1m4rq4cvdtvttf4o4el8ttai76mu52a6.apps.googleusercontent.com",
+  "234933592151-oibru43baqdsk4s63aqmncb1am73i0p7.apps.googleusercontent.com",
  forceCodeForRefreshToken: true,
  offlineAccess: true,
 });
