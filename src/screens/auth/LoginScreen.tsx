@@ -11,12 +11,12 @@ import {
 import LoginImageDark from "../../assets/images/login_dark_animation.png";
 import LoginImageLight from "../../assets/images/login_animation_light.png";
 import GoogleIcon from "../../assets/images/google.png";
-import Icon from "react-native-vector-icons/Ionicons";
 import OauthLoginButton from "../../components/auth/OauthLoginButton";
 import { useScheme, useTheme } from "../../theme/useTheme";
 import TouchAbleText from "../../components/auth/TouchAbleText";
 import FooterText from "../../components/auth/FooterText";
 import { signInWithGoogle } from "../../services/oauth.service";
+import { navigate } from "../../utils/navigation-util";
 
 const LoginScreen = () => {
  const { colors } = useTheme();
@@ -48,7 +48,7 @@ const LoginScreen = () => {
     <Text style={{ marginTop: 10, fontSize: 12, color: colors.text }}>or</Text>
     <TouchAbleText
      firstText="Continue with other's email"
-     onPress={() => {}}
+     onPress={() => navigate("Email Login")}
      style={styles.touchText}
     />
     <FooterText />
