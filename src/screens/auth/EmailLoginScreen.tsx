@@ -4,29 +4,70 @@ import StyleSaveAreaView from "../../components/common/StylesSaveAreaView";
 import HeaderBrand from "../../components/common/HeaderBrand";
 import CustomInput from "../../components/common/inputs/CustomInput";
 import CustomButton from "../../components/common/buttons/CustomButton";
-import { normalizeModerately } from "../../utils/scaling-util";
-import StylesGlobalText from "../../components/common/StylesGlobalText";
+import { navigate } from "../../utils/navigation-util";
+import { validateEmail } from "../../utils/validation-util";
+import { GlobalStyles } from "../../styles/GlobalStyle";
 
 export default function EmailLoginScreen() {
+ const [loading, setLoading] = React.useState(false);
+ const [email, setEmail] = React.useState("");
+ const [invalidEmail, setInvalidEmail] = React.useState("");
+
+ const validate = () => {
+  if (!validateEmail(email)) {
+   setInvalidEmail("Please enter a valid email");
+   return false;
+  }
+  return true;
+ };
+
+ const handleSubmit = async () => {
+  setLoading(true);
+  setTimeout(() => {
+   if (validate()) {
+    // When user email exist
+    // navigate("PasswordScreen", {
+    //  email: email,
+    // });
+    // If user email doesnt exist
+    navigate("EmailOtpScreen", {
+     email: email,
+    });
+   }
+   setLoading(false);
+  }, 2000);
+ };
+
  return (
   <StyleSaveAreaView>
    <HeaderBrand />
-   <ScrollView style={styles.container_input}>
-    <CustomInput label="Email :" placeholder="Eg: example@email.com" />
-    <CustomInput
-     label="Password :"
-     placeholder="Min 8-20 Characters"
-     mainContainerStyle={styles.input}
+   <View style={styles.container_input}>
+    <ScrollView>
+     <CustomInput
+      label="EMAIL :"
+      placeholder="Eg: example@email.com"
+      value={email}
+      inputMode="email"
+      focusable={true}
+      autoFocus={true}
+      returnKeyType="done"
+      error={invalidEmail}
+      onEndEditing={() => validate()}
+      onChangeText={(value) => {
+       setEmail(value);
+       setInvalidEmail("");
+      }}
+      onSubmitEditing={handleSubmit}
+     />
+    </ScrollView>
+   </View>
+   <View style={GlobalStyles.bottomBtn}>
+    <CustomButton
+     text="Next"
+     loading={loading}
+     disabled={loading}
+     onPress={() => handleSubmit()}
     />
-    <CustomInput
-     label="OTP :"
-     rightText={<StylesGlobalText>Resen in 60s</StylesGlobalText>}
-     placeholder="Enter OTP"
-     mainContainerStyle={styles.input}
-    />
-   </ScrollView>
-   <View style={styles.button_container}>
-    <CustomButton text="Sign In" onPress={() => {}} />
    </View>
   </StyleSaveAreaView>
  );
@@ -39,15 +80,5 @@ const styles = StyleSheet.create({
   display: "flex",
   flexDirection: "column",
   gap: 10,
- },
- input: {
-  marginTop: 40,
- },
- button_container: {
-  width: "100%",
-  position: "absolute",
-  top: normalizeModerately(680),
-  right: normalizeModerately(15),
-  paddingHorizontal: 8,
  },
 });
