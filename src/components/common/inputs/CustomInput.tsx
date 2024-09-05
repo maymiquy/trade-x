@@ -1,10 +1,13 @@
 import {
+ InputModeOptions,
+ ReturnKeyType,
  Platform,
  StyleSheet,
  Text,
  TextInput,
  TextStyle,
  View,
+ KeyboardType,
 } from "react-native";
 import React, { useState } from "react";
 import { FONTS } from "../../../utils/constants/Fonts";
@@ -18,6 +21,13 @@ interface CustomInputProps {
  label?: string;
  placeholder?: string;
  iconName?: string;
+ value?: string;
+ returnKeyType?: ReturnKeyType;
+ keyboardType?: KeyboardType;
+ inputMode?: InputModeOptions;
+ focusable?: boolean;
+ autoFocus?: boolean;
+ maxLength?: number;
  error?: string;
  leftIcon?: JSX.Element;
  rightIcon?: JSX.Element;
@@ -30,6 +40,9 @@ interface CustomInputProps {
  mainContainerStyle?: TextStyle;
  containerStyle?: TextStyle;
  textInputStyle?: TextStyle;
+ onEndEditing?: () => void;
+ onSubmitEditing?: () => void;
+ onChangeText?: (text: string) => void;
  onFocus?: () => void;
 }
 
@@ -37,7 +50,14 @@ const CustomInput: React.FC<CustomInputProps> = ({
  label,
  placeholder,
  iconName,
+ value,
+ returnKeyType,
+ keyboardType,
+ inputMode,
+ focusable,
+ autoFocus,
  error,
+ maxLength = 256,
  rightIcon,
  leftIcon,
  disabled,
@@ -49,6 +69,9 @@ const CustomInput: React.FC<CustomInputProps> = ({
  mainContainerStyle,
  containerStyle,
  textInputStyle,
+ onEndEditing = () => {},
+ onChangeText = () => {},
+ onSubmitEditing = () => {},
  onFocus = () => {},
  ...props
 }) => {
@@ -100,12 +123,25 @@ const CustomInput: React.FC<CustomInputProps> = ({
       textInputStyle,
      ]}
      secureTextEntry={password ? hideEyeIcon : false}
+     returnKeyType={returnKeyType}
+     keyboardType={keyboardType}
+     value={value}
+     inputMode={inputMode}
+     focusable={focusable}
+     autoFocus={autoFocus}
      autoCorrect={false}
      onFocus={() => {
       onFocus();
       setIsFocused(true);
      }}
-     maxLength={256}
+     onEndEditing={() => {
+      onEndEditing;
+     }}
+     onChangeText={(text) => {
+      onChangeText(text);
+     }}
+     onSubmitEditing={onSubmitEditing}
+     maxLength={maxLength}
      editable={!disabled}
      onBlur={() => {
       setIsFocused(false);
@@ -153,11 +189,11 @@ const styles = StyleSheet.create({
  },
  errorText: {
   color: Colors.errorColor,
-  fontSize: Platform.OS === "ios" ? RFValue(11) : RFValue(11),
+  fontSize: Platform.OS === "ios" ? RFValue(9) : RFValue(11),
   fontFamily: FONTS.Medium,
  },
  label: {
-  fontSize: Platform.OS === "ios" ? RFValue(9) : RFValue(14),
+  fontSize: Platform.OS === "ios" ? RFValue(10) : RFValue(12),
   fontFamily: FONTS.Regular,
  },
  labelContainer: {
@@ -179,7 +215,7 @@ const styles = StyleSheet.create({
   alignItems: "flex-start",
   height: 28,
   width: "82%",
-  paddingVertical: 5,
+  paddingVertical: 2,
  },
  password: {
   textAlignVertical: "center",

@@ -1,12 +1,17 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
-import BackButton from "./BackButton";
 import CenteredBrand from "./CenteredBrand";
+import BackButton from "./buttons/BackButton";
 
-const HeaderBrand = () => {
+interface HeaderBrandProps {
+ path?: string;
+}
+
+const HeaderBrand: React.FC<HeaderBrandProps> = (props) => {
  return (
   <View style={styles.header}>
-   <BackButton />
+   <BackButton path={props.path} />
+   <View style={styles.br} />
    <View style={styles.brandContainer}>
     <CenteredBrand />
    </View>
@@ -24,8 +29,14 @@ const styles = StyleSheet.create({
   alignItems: "center",
   overflow: "hidden",
  },
- brandContainer: {
+ br: {
   flex: 1,
+ },
+ brandContainer: {
+  position: "absolute",
+  top: 0,
+  left: 35,
+  right: 50,
   justifyContent: "center",
   alignItems: "center",
  },

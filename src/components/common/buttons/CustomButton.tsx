@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
  },
  loadingIndicator: {
   position: "absolute",
-  top: 0,
+  bottom: 0,
   left: 0,
   height: 2,
   backgroundColor: Colors.profit,
