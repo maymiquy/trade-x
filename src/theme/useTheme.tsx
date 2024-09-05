@@ -1,6 +1,6 @@
 import { ColorSchemeName, useColorScheme } from "react-native";
-import { useAppSelector } from "../hooks/app-hook";
-import { selectTheme } from "../hooks/reducer/theme-slice";
+import { useAppSelector } from "../redux/app-hook";
+import { selectTheme } from "../redux/slices/theme-slice";
 import { Colors } from "../utils/constants/Colors";
 
 interface ThemeColors {

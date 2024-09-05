@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "../store";
-import { token_storage } from "../storage";
+import type { RootState } from "../store/store";
+import { token_storage } from "../storage/storage";
 
 interface ThemeState {
  theme: string | null;

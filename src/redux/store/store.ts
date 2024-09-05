@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import reduxStorage from "./storage";
-import rootReducer from "./root-reducer";
+import reduxStorage from "../storage/storage";
+import rootReducer from "../root-reducer";
 import {
  persistStore,
  persistReducer,
